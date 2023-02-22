@@ -1,13 +1,11 @@
 import os
 import time
-import colorama
 import random
 import sys
 from colorama import Fore
 from googlesearch import search
 import signal
 
-colorama.init()
 def signal_handler(signal,frame):
    global Interrupted
    interrupted = True
