@@ -4,9 +4,9 @@ import colorama
 import random
 import sys
 from colorama import Fore
+from googlesearch import search
 
 colorama.init()
-
 # MAIN CODE #
 def main():
  print(Fore.LIGHTGREEN_EX + " / ___| |__  _ __ ___  _ __ (_) ___")
@@ -14,7 +14,27 @@ def main():
  print(Fore.LIGHTGREEN_EX + "| |___| | | | | | (_) | | | | | (__")
  print(Fore.LIGHTGREEN_EX + " \____|_| |_|_|  \___/|_| |_|_|\___|")
  print(Fore.LIGHTYELLOW_EX + "Search in? 1. specific page 2. everything in web")
- select = input(">>")
+ sel = input("[?] >>")
+ if sel =="1":
+   page = input("What do you want to search?:")
+   print(Fore.LIGHTBLUE_EX + "\n[!] Searching for" + page)
+   resul = search(page, pause=2.0, num=20, stop=20)
+   for r in resul:
+      print(r)
+   input("press enter to back")
+   main()
+ elif sel =="2":
+      page = input("What do you want to search?:")
+      print(Fore.LIGHTBLUE_EX + "\n[!] Searching infinitely for:" + page)
+      time.sleep(1)
+      resul = search(page, pause=2.0, stop=None)
+      for r in resul:
+        print(r)
+      input("press enter to back")
+      main()
+
+
+
 
 # START ANIMATION
 def anim():
@@ -85,29 +105,17 @@ def anim():
         i =(i + 1)% ls_len
         counttime = counttime + 1
 
-        os.popen("pip install colorama")
       
     # for windows OS
     if os.name =="nt":
         os.system("cls")
+        main()
           
     # for linux / Mac OS
     else:
         os.system("clear")
-    
-    main()
+        main()
 
    
-
-try:
-      anim()
-except Exception as e:
-    print(anim)
-    pass
-
-else:
-    print("ERROR")
-    print("Restarting...")
-    time.sleep(1)
-    os.system("clear")
-    anim()     
+anim()
+     
