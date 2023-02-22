@@ -5,8 +5,12 @@ import random
 import sys
 from colorama import Fore
 from googlesearch import search
+import signal
 
 colorama.init()
+def signal_handler(signal,frame):
+   global Interrupted
+   interrupted = True
 # MAIN CODE #
 def main():
  print(Fore.LIGHTGREEN_EX + " / ___| |__  _ __ ___  _ __ (_) ___")
@@ -15,23 +19,33 @@ def main():
  print(Fore.LIGHTGREEN_EX + " \____|_| |_|_|  \___/|_| |_|_|\___|")
  print(Fore.LIGHTYELLOW_EX + "Search in? 1. specific page 2. everything in web")
  sel = input("[?] >>")
- if sel =="1":
-   page = input("What do you want to search?:")
-   print(Fore.LIGHTBLUE_EX + "\n[!] Searching for" + page)
-   resul = search(page, pause=2.0, num=20, stop=20)
+ interrupted = False
+ signal.signal(signal.SIGINT, signal_handler)
+ if sel =="1" or sel=="specific page":
+   page = input("\nWhat do you want to search?:")
+   print(Fore.LIGHTBLUE_EX + "\n[!] Searching for:" + page)
+   resul = search(page, pause=2.0, num=10, stop=10)
    for r in resul:
       print(r)
    input("press enter to back")
    main()
- elif sel =="2":
-      page = input("What do you want to search?:")
+ elif sel =="2" or sel=="everything in web":
+      page = input("\nWhat do you want to search?:")
       print(Fore.LIGHTBLUE_EX + "\n[!] Searching infinitely for:" + page)
       time.sleep(1)
       resul = search(page, pause=2.0, stop=None)
       for r in resul:
         print(r)
-      input("press enter to back")
-      main()
+        if interrupted:
+          print("Exiting")
+          time.sleep(0.7)
+          main()
+
+ else:
+    print(Fore.LIGHTRED_EX + "an error was ocurred. Possible errors:")
+    print(Fore.LIGHTRED_EX + "[!] Are you connected to internet?")
+    print(Fore.LIGHTRED_EX + "[!] you selected right the options?")
+ 
 
 
 
