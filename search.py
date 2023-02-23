@@ -15,6 +15,7 @@ def main():
  print(Fore.LIGHTGREEN_EX + "| |   | '_ \| '__/ _ \| '_ \| |/ __|")
  print(Fore.LIGHTGREEN_EX + "| |___| | | | | | (_) | | | | | (__")
  print(Fore.LIGHTGREEN_EX + " \____|_| |_|_|  \___/|_| |_|_|\___|")
+ print(Fore.LIGHTWHITE_EX + "                V1                    ")
  print(Fore.LIGHTYELLOW_EX + "Search in? 1. specific page 2. everything in web")
  sel = input("[?] >>")
  interrupted = False
