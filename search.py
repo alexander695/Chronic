@@ -4,7 +4,6 @@ import random
 import sys
 from colorama import Fore
 from googlesearch import search
-import signal
 
 def signal_handler(signal,frame):
    global Interrupted
@@ -15,29 +14,31 @@ def main():
  print(Fore.LIGHTGREEN_EX + "| |   | '_ \| '__/ _ \| '_ \| |/ __|")
  print(Fore.LIGHTGREEN_EX + "| |___| | | | | | (_) | | | | | (__")
  print(Fore.LIGHTGREEN_EX + " \____|_| |_|_|  \___/|_| |_|_|\___|")
- print(Fore.LIGHTWHITE_EX + "                V1                    ")
+ print(Fore.LIGHTWHITE_EX + "                V1.4                 ")
  print(Fore.LIGHTYELLOW_EX + "Search in? 1. specific page 2. everything in web")
  sel = input("[?] >>")
- interrupted = False
- signal.signal(signal.SIGINT, signal_handler)
+
  if sel =="1" or sel=="specific page":
-   page = input("\nWhat do you want to search?:")
+   page = input("\nWhat do you want to search?: ")
    print(Fore.LIGHTBLUE_EX + "\n[!] Searching for:" + page)
    resul = search(page, pause=2.0, num=10, stop=10)
    for r in resul:
       print(r)
    input("press enter to back")
+   os.system("clear")
+   os.system("cls")
    main()
+
  elif sel =="2" or sel=="everything in web":
       page = input("\nWhat do you want to search?:")
       print(Fore.LIGHTBLUE_EX + "\n[!] Searching infinitely for:" + page)
       time.sleep(1)
       resul = search(page, pause=2.0, stop=None)
       for r in resul:
-        print(r)
-        if interrupted:
-          print("Exiting")
-          time.sleep(0.7)
+           print(r)
+      else:
+          print("an error was ocurred")
+          time.sleep(2)
           main()
 
  else:
@@ -60,7 +61,7 @@ def anim():
     print(Fore.LIGHTGREEN_EX + " \____|_| |_|_|  \___/|_| |_|_|\___|")
     time.sleep(0.7) 
       # String to be displayed when the application is loading
-    load_str = "starting..."
+    load_str = "starting...  Coded By PilowXe  "
     ls_len = len(load_str)
   
   
@@ -117,7 +118,9 @@ def anim():
         anicount = (anicount + 1)% 4
         i =(i + 1)% ls_len
         counttime = counttime + 1
-
+    
+    os.system("pip install colorama")
+    os.system("pip install google")
       
     # for windows OS
     if os.name =="nt":
